@@ -1,0 +1,14 @@
+.input {
+    height: 2.142857rem;
+    margin: .714286rem .714286rem;
+}
+.input_todo {
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    /* border: none; */
+    outline: none;
+    padding-left: .357143rem;
+    margin: 0;
+    padding: 0;
+}
