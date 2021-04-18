@@ -1,10 +1,6 @@
 import React, { Component } from 'react'
 
 export default class List extends Component {
-    // constructor(props) {
-    //     super(props);
-    //     // console.log(this.props);
-    // }
 
     handleCheckboxChange = (e) => {
         this.props.handleChange(e.target.checked, this.props.item.id);

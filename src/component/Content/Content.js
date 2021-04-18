@@ -3,9 +3,6 @@ import './Content.css'
 import List from './List'
 
 export default class Content extends Component {
-    // constructor(props) {
-    //     super(props);
-    // }
     render() {
         const content = this.props.list.data;
         const handleChange = this.props.handleChange;

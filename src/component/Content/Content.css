@@ -9,9 +9,6 @@
     line-height: 2.142857rem;
     border-bottom: 1px solid #ccc;
 }
-/* .list-item:first-child {
-    background-color: pink;
-} */
 .list-item:last-child {
     border-bottom: 0;
 }
