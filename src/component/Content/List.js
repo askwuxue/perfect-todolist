@@ -5,25 +5,27 @@ export default class List extends Component {
     //     super(props);
     //     // console.log(this.props);
     // }
-
+    
     handleCheckboxChange = (e) => {
-        console.log(e.target.checked);
         this.props.handleChange(e.target.checked, this.props.item.id);
     }
 
     handleDelete = () => {
-        console.log(this.props.item.id);
         this.props.handleDelete(this.props.item.id);
     }
 
     render() {
-        console.log(this.props);
+        const isDeleted = this.props.item.isDeleted;
         const data = this.props.item;
         const className = data.isFinished ? "list-item list-finish" : "list-item";
-        return (
-            <li className={className}>
-                <input type="checkbox" onChange={this.handleCheckboxChange}  defaultChecked={data.isFinished}  className="list-operate list-checkbox"/>{data.contents}<input type="button" onClick={this.handleDelete}  value="delete" className="list-operate list-delete" />
-            </li>
-        )
+        // 根据条件渲染如果已经删除就不渲染
+        if (!isDeleted) {
+            return (
+                <li className={className}>
+                    <input type="checkbox" onChange={this.handleCheckboxChange}  defaultChecked={data.isFinished}  className="list-operate list-checkbox"/>{data.contents}<input type="button" onClick={this.handleDelete}  value="delete" className="list-operate list-delete" />
+                </li>
+            )
+        }
+        return null;
     }
 }

@@ -8,7 +8,6 @@ export default class Input extends Component {
     // }
 
     handleAddList = (content) => {
-        console.log(this.props);
         this.props.handleAddList(content);
     }
 

@@ -73,7 +73,6 @@ export default class App extends Component {
   // 根据用户输入添加list
   handleAddList = (content) => {
     const lastId = Number.parseInt(data[data.length - 1].id);
-    console.log('lastId: ', lastId);
     // 添加的元素的id
     let id = (lastId + 1).toString(10).padStart(13, '0');
 
