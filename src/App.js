@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import './App.css';
 import Input from './component/Input/Input';
-import List from './component/Content/Content'
+import Content from './component/Content/Content';
 
 // 模拟后端接收到的数据
 const response = {
@@ -50,12 +50,14 @@ if (response.status === 200) {
 // TODO function组件没法管理state
 export default class App extends Component {
   state = {data}
-  handleChange = (e, id) => {
-    // 根据checkbox的改变，重新处理数据并setState
-    data.forEach(ele => {
-      if (ele.id === id) {
-        ele.isFinished = !ele.isFinished
+  handleChange = (id) => {
+    // 更新数据
+    data = data.map(item => {
+      if (id === item.id) {
+        // TODO 解构赋值可以用于更新对象中某个属性的值
+        return {...item, "isFinished": !item.isFinished}
       }
+      return item
     });
     this.setState({data})
   }
@@ -71,26 +73,26 @@ export default class App extends Component {
   }
 
   // 根据用户输入添加list
-  handleAddList = (content) => {
-    const lastId = Number.parseInt(data[data.length - 1].id);
-    // 添加的元素的id
-    let id = (lastId + 1).toString(10).padStart(13, '0');
-
-    data.push({
+  handleAddList = (id, content) => {
+    let newItem = {
       "id": id,
       "isFinished": false,
       "contents": content,
       "isDeleted": false
-    })
+    };
+
+    data = [newItem, ...data];
+
     this.setState({data});
   } 
 
   render() {
+    const list = {item: this.state, handleChange: this.handleChange, handleDelete: this.handleDelete};
     return (
     <div className="App">
       <h1>todoList</h1>
       <Input handleAddList={this.handleAddList}/>
-      <List list={this.state} handleChange={this.handleChange} handleDelete={this.handleDelete} />
+      <Content list={list}/>
     </div>
     )
   }

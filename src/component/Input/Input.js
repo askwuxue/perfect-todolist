@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { nanoid } from 'nanoid'
 import  './Input.css'
 
 export default class Input extends Component {
@@ -15,7 +16,8 @@ export default class Input extends Component {
     }
 
     handleAddList = (content) => {
-        this.props.handleAddList(content);
+        let id = nanoid();
+        this.props.handleAddList(id, content);
     }
 
     // 输入框失去焦点添加list
@@ -41,7 +43,6 @@ export default class Input extends Component {
     // 页面挂载完毕，调用自动获得焦点，只调用一次
     componentDidMount() {
         console.log('componentDidMount: ');
-        // this.textInput();
         this.focusTextInput();
     }
 

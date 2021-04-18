@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 
 export default class List extends Component {
 
-    handleCheckboxChange = (e) => {
-        this.props.handleChange(e.target.checked, this.props.item.id);
+    handleCheckboxChange = (id) => {
+        this.props.handleChange(this.props.item.id);
     }
 
     handleDelete = () => {
@@ -11,19 +11,20 @@ export default class List extends Component {
     }
 
     render() {
-        const isDeleted = this.props.item.isDeleted;
-        const data = this.props.item;
-        const className = data.isFinished ? "list-item list-finish" : "list-item";
+        const {item} = this.props;
+        const isDeleted = item.isDeleted;
+        const className = item.isFinished ? "list-item list-finish" : "list-item";
         // 根据条件渲染如果已经删除就不渲染
         if (!isDeleted) {
             return (
                 <li className={className}>
                     <input type="checkbox"
                         onChange={this.handleCheckboxChange}  
-                        defaultChecked={data.isFinished}  
+                        // TODO这个地方使用defaultChecked只会在第一次有效
+                        checked={item.isFinished} 
                         className="list-operate list-checkbox"
                     />
-                    {data.contents}
+                    {item.contents}
                     <input 
                         type="button" 
                         onClick={this.handleDelete}  

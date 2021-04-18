@@ -4,14 +4,13 @@ import List from './List'
 
 export default class Content extends Component {
     render() {
-        const content = this.props.list.data;
-        const handleChange = this.props.handleChange;
-        const handleDelete = this.props.handleDelete;
+        const {item, handleChange, handleDelete} = this.props.list;
+        const content = item.data;
         return (
             <div className="list">
                 <ul>
                     {content.map(item => {
-                        return <List item={item} key={item.id} handleChange={handleChange} handleDelete={handleDelete}/>
+                        return <List item={item} handleChange={handleChange} handleDelete={handleDelete}  key={item.id}/>
                     })}
                 </ul>
             </div>
