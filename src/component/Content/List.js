@@ -5,7 +5,7 @@ export default class List extends Component {
     //     super(props);
     //     // console.log(this.props);
     // }
-    
+
     handleCheckboxChange = (e) => {
         this.props.handleChange(e.target.checked, this.props.item.id);
     }
@@ -22,7 +22,18 @@ export default class List extends Component {
         if (!isDeleted) {
             return (
                 <li className={className}>
-                    <input type="checkbox" onChange={this.handleCheckboxChange}  defaultChecked={data.isFinished}  className="list-operate list-checkbox"/>{data.contents}<input type="button" onClick={this.handleDelete}  value="delete" className="list-operate list-delete" />
+                    <input type="checkbox"
+                        onChange={this.handleCheckboxChange}  
+                        defaultChecked={data.isFinished}  
+                        className="list-operate list-checkbox"
+                    />
+                    {data.contents}
+                    <input 
+                        type="button" 
+                        onClick={this.handleDelete}  
+                        value="delete" 
+                        className="list-operate list-delete" 
+                    />
                 </li>
             )
         }

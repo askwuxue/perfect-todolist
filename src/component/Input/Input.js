@@ -3,9 +3,16 @@ import  './Input.css'
 
 export default class Input extends Component {
 
-    // constructor(props) {
-    //     super(props);
-    // }
+    constructor(props) {
+        super(props);
+        // 使用ref自动获得焦点
+        this.textInput = React.createRef();
+   }
+
+    // 自动获得焦点
+    focusTextInput = () => {
+        this.textInput.current.focus();
+    }
 
     handleAddList = (content) => {
         this.props.handleAddList(content);
@@ -29,12 +36,25 @@ export default class Input extends Component {
                 e.target.value = ''; 
             }
         }
-    } 
+    }
+
+    // 页面挂载完毕，调用自动获得焦点，只调用一次
+    componentDidMount() {
+        console.log('componentDidMount: ');
+        // this.textInput();
+        this.focusTextInput();
+    }
 
     render() {
         return (
             <div className='input'>
-                <input className='input input_todo'  placeholder="请输入您的list" onBlur={this.handleOnblur} onKeyPress={this.handleOnKeyPress}/>
+                <input 
+                    className='input input_todo'  
+                    placeholder="请输入您的list" 
+                    onBlur={this.handleOnblur} 
+                    onKeyPress={this.handleOnKeyPress}
+                    ref={this.textInput}
+                />
             </div>
         )
     }
