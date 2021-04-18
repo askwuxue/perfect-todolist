@@ -3,11 +3,12 @@ import  './Input.css'
 
 export default class Input extends Component {
 
-    constructor(props) {
-        super(props);
-    }
+    // constructor(props) {
+    //     super(props);
+    // }
 
     handleAddList = (content) => {
+        console.log(this.props);
         this.props.handleAddList(content);
     }
 

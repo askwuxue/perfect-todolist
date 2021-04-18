@@ -3,9 +3,9 @@ import './Content.css'
 import List from './List'
 
 export default class Content extends Component {
-    constructor(props) {
-        super(props);
-    }
+    // constructor(props) {
+    //     super(props);
+    // }
     render() {
         console.log(this.props.list.data);
         const content = this.props.list.data;
