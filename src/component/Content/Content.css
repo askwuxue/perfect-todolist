@@ -18,6 +18,9 @@
 .list-item:hover {
     background-color: pink;
 }
+.list-item:hover .list-delete {
+    display: block;
+}
 .list-operate {
     position: absolute;
     top: 50%;
@@ -27,5 +30,11 @@
     left: .714286rem;
 }
 .list-delete {
+    display: none;
     right: .714286rem;
+}
+
+.list-finish {
+    background-color: #ccc;
+    text-decoration:line-through
 }

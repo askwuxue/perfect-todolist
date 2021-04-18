@@ -1,50 +1,97 @@
 import React, { Component } from 'react'
 import './App.css';
 import Input from './component/Input/Input';
-import List from './component/List/List'
+import List from './component/Content/Content'
 
-const Data = {
+// 模拟后端接收到的数据
+const response = {
   "status": 200,
   "data": [
     {
-      "isFinished":false,
-      "contents": "test1",
+      "id": "0000000000001",
+      "isFinished": false,
+      "contents": "hekadldf",
       "isDeleted": false
     },
     {
+      "id": "0000000000002",
       "isFinished":false,
-      "contents": "test2",
+      "contents": "fdsafasd",
       "isDeleted": false
     },
     {
+      "id": "0000000000003",
       "isFinished":false,
-      "contents": "test2",
+      "contents": "sdfasdf",
       "isDeleted": false
     },
     {
-      "isFinished":false,
-      "contents": "test2",
+      "id": "0000000000004",
+      "isFinished":true,
+      "contents": "werwer",
       "isDeleted": false
     },
     {
+      "id": "0000000000005",
       "isFinished":false,
-      "contents": "test2",
-      "isDeleted": false
+      "contents": "jrtu",
+      "isDeleted": true
     }    
   ],
   "message": "ok"
 }
 
+// 数据简单处理
+let data;
+if (response.status === 200) {
+  data = response.data
+}
 
 // TODO function组件没法管理state
 export default class App extends Component {
-  state = Data
+  state = {data}
+  handleChange = (e, id) => {
+    // 根据checkbox的改变，重新处理数据并setState
+    data.forEach(ele => {
+      if (ele.id === id) {
+        ele.isFinished = !ele.isFinished
+      }
+    });
+    this.setState({data})
+  }
+
+  // 根据用户的点击删除处理数据
+  handleDelete = (id) => {
+    data.forEach(ele => {
+      if (ele.id === id) {
+        ele.isDeleted = !ele.isDeleted
+      }
+    });
+    this.setState({data})  
+  }
+
+  // 根据用户输入添加list
+  handleAddList = (content) => {
+    const lastId = Number.parseInt(data[data.length - 1].id);
+    console.log('lastId: ', lastId);
+    // 添加的元素的id
+    let id = (lastId + 1).toString(10).padStart(13, '0');
+
+    data.push({
+      "id": id,
+      "isFinished": false,
+      "contents": content,
+      "isDeleted": false
+    })
+    this.setState({data});
+  } 
+
   render() {
     return (
     <div className="App">
       <h1>todoList</h1>
-      <Input data={this.statey}/>
-      <List />
+      <Input handleAddList={this.handleAddList}/>
+      <List list={this.state} handleChange={this.handleChange} handleDelete={this.handleDelete} />
     </div>
     )
   }
